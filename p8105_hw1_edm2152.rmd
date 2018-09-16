@@ -30,3 +30,34 @@ problem1_df = tibble(
 
 ```
 
+When I try to take the mean of each of the four variables:
+
+The mean of the random sample variable is `r mean(random_sample)`.
+
+The mean of the logical vector variable is `r mean(greater2_logical)`.
+
+The mean of the character vector variable is `r mean(vector_character)`.
+
+The mean of the factor vector variable is `r mean(vector_factor)`.
+
+Only the mean of the random sample variable will work, because it is the only numerical variable in the data frame. 
+
+Code chunk below that applies the as.numeric function to the 3 variables: 
+
+```{r as_numeric, include=FALSE}
+
+  greater2_logical_numeric = as.numeric(greater2_logical) 
+  vector_character_numeric = as.numeric(vector_character)
+  vector_factor_numeric = as.numeric(vector_factor)
+
+```
+
+Second code chunk that converts character variable from character to factor to numeric and cconverts the factor variable from factor to character to numeric.
+
+```{r Second_Conversion}
+
+```
+
+
+
+# Problem 2
