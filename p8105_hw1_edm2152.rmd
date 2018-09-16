@@ -4,3 +4,29 @@ author: "Eric Morris"
 date: "September 15, 2018"
 output: github_document
 ---
+
+```{r load_tidy, echo=FALSE}
+
+library(tidyverse)
+
+```
+
+# Problem 1 
+
+The code chunk below creates a data frame comprised of: 
+* A random sample of size 10 from a uniform[0, 5] distribution
+* A logical vector indicating whether elements of the sample are greater than 2
+* A (length-10) character vector
+* A (length-10) factor vector
+
+```{r Problem_1}
+
+problem1_df = tibble(
+  random_sample = runif(10,0,5)
+  greater2_logical = which(random_sample > 2)
+  vector_character = character(length = 10)
+  vector_factor = factor(c("low", "high", "low", "high", "low", "high", "low", "high", "low", "high"))
+)
+
+```
+
