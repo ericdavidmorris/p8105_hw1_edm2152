@@ -5,7 +5,7 @@ date: "September 15, 2018"
 output: github_document
 ---
 
-```{r load_tidy, echo=FALSE}
+```{r load_tidy, include=FALSE}
 
 library(tidyverse)
 
@@ -20,45 +20,44 @@ The code chunk below creates a data frame comprised of:
 * A (length-10) factor vector
 
 ```{r Problem_1}
-
 problem1_df = tibble(
-  random_sample = runif(10,0,5)
-  greater2_logical = which(random_sample > 2)
-  vector_character = character(length = 10)
-  vector_factor = factor(c("low", "high", "low", "high", "low", "high", "low", "high", "low", "high"))
+  prob1_random_sample = runif(10,0,5),
+  prob1_logical = prob1_random_sample > 2,
+  prob1_character = c("boy", "girl", "boy","boy", "girl","boy", "girl","boy", "girl","boy"),
+  prob1_factor = factor(prob1_character)
 )
-
 ```
 
-When I try to take the mean of each of the four variables:
+Below I try to take the mean of each of the four variables:
 
-The mean of the random sample variable is `r mean(random_sample)`.
+The mean of the random sample variable is `r mean(problem1_df$prob1_random_sample)`.
 
-The mean of the logical vector variable is `r mean(greater2_logical)`.
+The mean of the logical vector variable is `r mean(problem1_df$prob1_logical)`.
 
-The mean of the character vector variable is `r mean(vector_character)`.
+The mean of the character vector variable is `r mean(problem1_df$prob1_character)`(this will not work).
 
-The mean of the factor vector variable is `r mean(vector_factor)`.
+The mean of the factor vector variable is `r mean(problem1_df$prob1_factor)` (this will not work).
 
-Only the mean of the random sample variable will work, because it is the only numerical variable in the data frame. 
+When trying to take the mean of the four variables, only the mean of the random sample variable and the logical variable will work. We are able to take the mean of the random sample because it is numeric. The logical variable will also work, because it contains TRUE and FALSE which are reserved words in R and a boolean data type. TRUE is automatically assigned 1 by R and FALSE is assigned 0, so it will take the mean of a collection of 1s and 0s depending on the logical outcome. The vector and factor variables will not work because they contain characters. 
 
-Code chunk below that applies the as.numeric function to the 3 variables: 
+Code chunk below will apply the as.numeric function to the logical, character, and factor variables: 
 
-```{r as_numeric, include=FALSE}
-
-  greater2_logical_numeric = as.numeric(greater2_logical) 
-  vector_character_numeric = as.numeric(vector_character)
-  vector_factor_numeric = as.numeric(vector_factor)
-
+```{r as_numeric, results='hide'}
+  prob1_logical_numeric = as.numeric(problem1_df$prob1_logical) 
+  prob1_character_numeric = as.numeric(problem1_df$prob1_character)
+  prob1_factor_numeric = as.numeric(problem1_df$prob1_factor)
 ```
 
-Second code chunk that converts character variable from character to factor to numeric and cconverts the factor variable from factor to character to numeric.
+The as.numeric function works for the factor and logical variables but not for the character variable. 
+
+Below is a second code chunk that converts character variable from character to factor to numeric and converts the factor variable from factor to character to numeric.
 
 ```{r Second_Conversion}
-
+    prob1_char_factor_numeric = as.numeric(as.factor(problem1_df$prob1_character))
+    prob1_factor_char_numeric = as.numeric(as.character(problem1_df$prob1_factor))
 ```
 
-
+This time, the character variable is successfully converted to numeric after first being converted to factor. The factor variable fails to convert to numeric after being converted to character, the same as the chunk before. 
 
 # Problem 2
 
@@ -70,12 +69,11 @@ Code chunk below create a data frame comprised of:
 * A factor vector created by coercing the above logical vector
 
 ```{r Problem_2}
-
 problem2_df = tibble(
-  x = rnorm(1000)
-  y = rnorm(1000)
-  prob2_logical = which(x + y > 0)
-  prob2_logical_numeric = as.numeric(prob2_logical)
+  x = rnorm(1000),
+  y = rnorm(1000),
+  prob2_logical = x + y > 0,
+  prob2_logical_numeric = as.numeric(prob2_logical),
   prob2_logical_factor = factor(prob2_logical)
 )
 ```
