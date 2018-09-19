@@ -80,7 +80,7 @@ problem2_df = tibble(
 )
 ```
 
-The problem 2 dataset contains `r nrow(problem2_df)` rows (observations) and `r ncol(problem2_df)` columns (variables). The mean of x is `r mean(problem2_df$x)` and the median of x is `r median(problem2_df$x)`. The proportion of cases for which the logical vector is TRUE is 
+The problem 2 dataset contains `r nrow(problem2_df)` rows (observations) and `r ncol(problem2_df)` columns (variables). The mean of x is `r mean(problem2_df$x)` and the median of x is `r median(problem2_df$x)`. The proportion of cases for which the logical vector is TRUE is `r sum(problem2_df$prob2_logical_numeric)/nrow(problem2_df)`. 
 
 First scatterplot of y vs x (color is logical variable):
 
