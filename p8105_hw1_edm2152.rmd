@@ -21,6 +21,8 @@ The code chunk below creates a data frame comprised of:
   * A (length-10) factor vector
 
 ```{r Problem_1}
+set.seed(91)
+
 problem1_df = tibble(
   prob1_random_sample = runif(10, 0, 5),
   prob1_logical = prob1_random_sample > 2,
@@ -71,6 +73,8 @@ Code chunk below will create a data frame comprised of:
   * A factor vector created by coercing the above logical vector
 
 ```{r Problem_2}
+set.seed(91)
+
 problem2_df = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
@@ -82,11 +86,14 @@ problem2_df = tibble(
 
 The problem 2 dataset contains `r nrow(problem2_df)` rows (observations) and `r ncol(problem2_df)` columns (variables). The mean of x is `r mean(problem2_df$x)` and the median of x is `r median(problem2_df$x)`. The proportion of cases for which the logical vector is TRUE is `r sum(problem2_df$prob2_logical_numeric)/nrow(problem2_df)`. 
 
-First scatterplot of y vs x (color is logical variable):
+First scatterplot of y vs x (color is logical variable) and exporting the first scatterplot to my project directory using ggsave:
 
 ```{r}
 ggplot(problem2_df, aes(x = x, y = y, color = problem2_df$prob2_logical)) + geom_point()
+
+ggsave("./prob2_first_scatter_plot.pdf", height = 4, width = 6)
 ```
+
 
 Second scatterplot of y vs x (color is numeric variable):
 
@@ -102,10 +109,4 @@ ggplot(problem2_df, aes(x = x, y = y, color = problem2_df$prob2_logical_factor))
 
 
 Since the second plot involves a numeric variable, r assigns a color scale between 0 and 1 despite the fact that there are no values between 0 and 1. This differs from the logical and factor variable plots where r recognizes TRUE and FALSE as 1 and 0, respectively, but creates a binary color scheme and no scale between 0 and 1. 
-
-Exporting the first scatterplot to my project directory using ggsave: 
-
-```{r}
-ggsave("./prob2_first_scatter_plot.pdf", height = 4, width = 6)
-```
 
